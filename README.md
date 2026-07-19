@@ -1,5 +1,7 @@
 # OSPF Resiliency Lab
 
+[![Validate lab](https://github.com/JohnnyZLi/OSPF-Resiliency-Lab/actions/workflows/validate.yml/badge.svg)](https://github.com/JohnnyZLi/OSPF-Resiliency-Lab/actions/workflows/validate.yml)
+
 A reproducible four-router lab that proves equal-cost OSPF routing, injects a silent core-router failure, measures reconvergence, checks reachability, and confirms that both paths return after recovery.
 
 The topology runs [FRRouting](https://frrouting.org/) 10.7.0 containers under [Containerlab](https://containerlab.dev/). All router configurations, addressing, validation logic, and CI are stored in the repository.
@@ -73,6 +75,20 @@ GitHub Actions runs two levels of validation on every push and pull request:
 
 - static tests on Python 3.11, 3.12, and 3.13; and
 - an end-to-end job that installs a pinned Containerlab release, deploys all four FRR routers, injects the failure, uploads the JSON evidence, and destroys the lab.
+
+### Latest verified run
+
+The first clean GitHub Actions run on July 19, 2026 completed every static and integration job successfully. From `edge-west` to `edge-east`, it observed:
+
+| Check | Result |
+| --- | --- |
+| Baseline route | Two equal-cost next hops |
+| Injected fault | `core-a` process pause |
+| Reconvergence | 2.800 seconds |
+| Reachability during failure | Passed |
+| Recovery of both paths | 6.094 seconds |
+
+See the committed [`evidence/ci-run.json`](evidence/ci-run.json) and the originating [GitHub Actions run](https://github.com/JohnnyZLi/OSPF-Resiliency-Lab/actions/runs/29679483196). These timings describe one GitHub-hosted runner; they are evidence of the test behavior, not a production performance guarantee.
 
 ## Design boundaries
 

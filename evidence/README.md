@@ -10,3 +10,5 @@
 6. restored `core-a` and confirmed both paths return.
 
 Local reports are ignored because measurements depend on the host. The GitHub Actions workflow uploads its report as the `ospf-verification-evidence` artifact on each successful integration run.
+
+[`ci-run.json`](ci-run.json) is a preserved report from the first successful end-to-end workflow run. Its measured values are tied to that GitHub-hosted runner and should not be treated as a production benchmark.

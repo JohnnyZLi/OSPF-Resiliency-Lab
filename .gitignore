@@ -3,3 +3,4 @@ __pycache__/
 clab-ospf-resilience/
 evidence/*.json
 !evidence/README.md
+!evidence/ci-run.json

@@ -1,0 +1,28 @@
+{
+  "timestamp_utc": "2026-07-19T08:15:13.717563+00:00",
+  "lab": "ospf-resilience",
+  "source": "edge-west",
+  "destination": "10.255.0.4/32",
+  "baseline_full_neighbors": {
+    "edge-west": 2,
+    "core-a": 3,
+    "core-b": 3,
+    "edge-east": 2
+  },
+  "baseline_next_hops": [
+    "10.0.12.2",
+    "10.0.13.2"
+  ],
+  "failure_injected": "docker pause clab-ospf-resilience-core-a",
+  "failed_path_next_hops": [
+    "10.0.13.2"
+  ],
+  "reconvergence_seconds": 2.8,
+  "reachability_during_failure": true,
+  "restored_next_hops": [
+    "10.0.12.2",
+    "10.0.13.2"
+  ],
+  "recovery_seconds": 6.094,
+  "result": "pass"
+}
