@@ -1,0 +1,37 @@
+name: ospf-resilience
+
+topology:
+  defaults:
+    kind: linux
+    image: quay.io/frrouting/frr:10.7.0
+    image-pull-policy: IfNotPresent
+    sysctls:
+      net.ipv4.ip_forward: 1
+
+  nodes:
+    edge-west:
+      binds:
+        - configs/edge-west/frr.conf:/etc/frr/frr.conf
+        - configs/daemons:/etc/frr/daemons
+
+    core-a:
+      binds:
+        - configs/core-a/frr.conf:/etc/frr/frr.conf
+        - configs/daemons:/etc/frr/daemons
+
+    core-b:
+      binds:
+        - configs/core-b/frr.conf:/etc/frr/frr.conf
+        - configs/daemons:/etc/frr/daemons
+
+    edge-east:
+      binds:
+        - configs/edge-east/frr.conf:/etc/frr/frr.conf
+        - configs/daemons:/etc/frr/daemons
+
+  links:
+    - endpoints: ["edge-west:eth1", "core-a:eth1"]
+    - endpoints: ["edge-west:eth2", "core-b:eth1"]
+    - endpoints: ["core-a:eth2", "edge-east:eth1"]
+    - endpoints: ["core-b:eth2", "edge-east:eth2"]
+    - endpoints: ["core-a:eth3", "core-b:eth3"]

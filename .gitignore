@@ -1,0 +1,5 @@
+__pycache__/
+*.py[cod]
+clab-ospf-resilience/
+evidence/*.json
+!evidence/README.md
