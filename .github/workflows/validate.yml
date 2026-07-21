@@ -44,7 +44,7 @@ jobs:
       - name: Verify OSPF, inject failure, and measure recovery
         run: python3 scripts/verify_lab.py --report evidence/ci-run.json
       - name: Upload verification evidence
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: ospf-verification-evidence
           path: evidence/ci-run.json
